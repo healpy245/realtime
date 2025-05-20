@@ -18,18 +18,27 @@
     </div>
 
     @push('scripts')
-    <script>
-        // Listen for new messages
-        window.Echo.channel('chat')
-            .listen('MessageSent', (e) => {
-                console.log('Message received:', e.message);
-                const messagesDiv = document.getElementById('messages');
-                const messageElement = document.createElement('div');
-                messageElement.className = 'bg-gray-100 p-4 rounded-lg';
-                messageElement.textContent = e.message;
-                messagesDiv.appendChild(messageElement);
-                
+        <script>
+            // Listen for new messages<script> import Echo from 'laravel-echo';
+            import Pusher from 'pusher-js';
+            window.Pusher = Pusher;
+            window.Echo = new Echo({
+                broadcaster: 'pusher',
+                key: 'cbefd2bcb20dc0d87870',
+                cluster: 'ap2',
             });
-    </script>
+
+
+            window.Echo.channel('chat')
+                .listen('MessageSent', (e) => {
+                    console.log('Message received:', e.message);
+                    const messagesDiv = document.getElementById('messages');
+                    const messageElement = document.createElement('div');
+                    messageElement.className = 'bg-gray-100 p-4 rounded-lg';
+                    messageElement.textContent = e.message;
+                    messagesDiv.appendChild(messageElement);
+
+                });
+        </script>
     @endpush
-</x-app-layout> 
+</x-app-layout>

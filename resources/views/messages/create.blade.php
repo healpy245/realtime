@@ -1,3 +1,13 @@
+<script> import Echo from 'laravel-echo';
+    import Pusher from 'pusher-js';
+    window.Pusher = Pusher;
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: 'cbefd2bcb20dc0d87870',
+        cluster: 'ap2',
+    });
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
